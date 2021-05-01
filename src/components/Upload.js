@@ -1,12 +1,35 @@
-import {useRef} from 'react';
-import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react"
-import {db, storage} from "../Firebase";
+import { useRef } from 'react';
+import { Button, Flex, Heading, Text } from "@chakra-ui/react"
+import { storage } from "../Firebase";
 
 const Upload = ({ setIsUploading, setUploaded, setImageUrl }) => {
     const refUpload = useRef(null);
     let imageRef;
 
+    // Dragging methods
+    const dragOver = (e) => {
+        e.preventDefault();
+    };
+
+    const dragEnter = (e) => {
+        e.preventDefault();
+    };
+
+    const dragLeave = (e) => {
+        e.preventDefault();
+    };
+
+    const fileDrop = (e) => {
+        e.preventDefault();
+        const image = e.dataTransfer.files[0];
+        const storageRef = storage.ref();
+        imageRef = storageRef.child(image.name + new Date());
+        setIsUploading(true);
+        imageRef.put(image).then(() => {setIsUploading(false); setUploaded(true); setUrl()});
+    };
+
     const onImageSelected = (e) => {
+        e.preventDefault();
         const image = e.target.files[0];
         const storageRef = storage.ref();
         imageRef = storageRef.child(image.name + new Date());
@@ -45,6 +68,11 @@ const Upload = ({ setIsUploading, setUploaded, setImageUrl }) => {
                 padding="20px"
                 borderRadius="20px"
                 justifyContent="space-around"
+                // For Dragging
+                onDragOver={dragOver}
+                onDragEnter={dragEnter}
+                onDragLeave={dragLeave}
+                onDrop={fileDrop}
             >
                 <img src="https://img.icons8.com/ios/452/drag-and-drop.png" alt="upload" height="100" width="100"/>
                 <Text fontSize="sm">Drag & Drop your image here</Text>

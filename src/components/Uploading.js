@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Progress } from "@chakra-ui/react"
+import { Flex, Heading, Progress } from "@chakra-ui/react"
 
 const Uploading = () => {
     return ( 

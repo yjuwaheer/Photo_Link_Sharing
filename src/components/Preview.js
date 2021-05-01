@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Flex, Heading, Text, Button, Image } from "@chakra-ui/react"
+import { Flex, Heading, Text, Button, Image } from "@chakra-ui/react"
 
 const Preview = ({ imageUrl, setUploaded }) => {
     const [linkCopied, setLinkCopied] = useState(false);
@@ -21,7 +21,7 @@ const Preview = ({ imageUrl, setUploaded }) => {
             <Heading size="md">Uploaded Successfully!</Heading>
             <Image src={imageUrl} 
                 alt="" 
-                width="25vw"
+                maxWidth="25vw"
                 height="30vh"
                 borderRadius="20px"
             />
@@ -61,7 +61,7 @@ const Preview = ({ imageUrl, setUploaded }) => {
                 top="10px"
                 onClick={() => {setUploaded(false)}}
             >
-                <span class="material-icons material-icons-outlined">arrow_back</span>
+                <span className="material-icons material-icons-outlined">arrow_back</span>
             </Button>
         </Flex>
      );
