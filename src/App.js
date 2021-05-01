@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import Upload from './components/Upload';
+import Uploading from './components/Uploading';
+import Preview from './components/Preview';
+// Importing ChakraProvider
+import { ChakraProvider, Flex } from '@chakra-ui/react';
 
 function App() {
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploaded, setUploaded] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider>
+      <Flex justify="center" align="center" className="app">
+        {(!isUploading && !uploaded) && <Upload setIsUploading={setIsUploading} setUploaded={setUploaded} setImageUrl={setImageUrl} />}
+        {isUploading && <Uploading />}
+        {uploaded && <Preview imageUrl={imageUrl} setUploaded={setUploaded} />}
+      </Flex>
+    </ChakraProvider>
   );
 }
 
