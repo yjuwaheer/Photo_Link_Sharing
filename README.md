@@ -8,7 +8,7 @@ Challenge by devchallenges.io
 - HTML
 - CSS
 - React
-- Firebase
+- Firebase (Storage)
 
 # Getting Started with Create React App
 
